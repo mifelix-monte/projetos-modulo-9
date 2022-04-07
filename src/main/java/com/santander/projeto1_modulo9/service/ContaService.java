@@ -6,5 +6,5 @@ import com.santander.projeto1_modulo9.model.Conta;
 
 public interface ContaService {
 
-    ContaResponse create (Integer idUsuario, ContaRequest contaRequest);
+    Conta create (Integer idUsuario, ContaRequest contaRequest);
 }

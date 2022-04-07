@@ -18,7 +18,7 @@ public class ContaController {
     ContaService contaService;
 
     @PostMapping ("/usuario/{idUsuario}")
-    public ContaResponse create (@PathVariable Integer idUsuario, @RequestBody ContaRequest contaRequest){
+    public Conta create (@PathVariable Integer idUsuario, @RequestBody ContaRequest contaRequest){
         return contaService.create(idUsuario, contaRequest);
     }
 }

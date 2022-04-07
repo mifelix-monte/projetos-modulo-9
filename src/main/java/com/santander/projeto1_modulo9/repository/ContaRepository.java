@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ContaRepository extends JpaRepository<Conta, Integer> {
-    Optional<Conta> findByIdOrElseThrow(Integer idUsuario);
+    Optional<Conta> findById(Integer idUsuario);
 }

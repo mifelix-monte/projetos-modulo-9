@@ -5,6 +5,8 @@ import com.santander.projeto1_modulo9.dto.ContaRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -28,10 +30,13 @@ public class Conta {
     private Integer agencia;
 
     @Column(name = "data_criacao")
+    @CreatedDate //dessa forma ele vai reconhecer que esse campo é a data de criação
+    @UpdateTimestamp
     private LocalDateTime dataCriacao;
 
     @Column(name = "data_atualizacao")
     @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime dataAtualizacao;
 
     @Column(name = "saldo")

@@ -49,6 +49,7 @@ public class Usuario {
 
     @Column(name = "data_criacao")
     @CreatedDate //dessa forma ele vai reconhecer que esse campo é a data de criação
+    @UpdateTimestamp
     private LocalDateTime dataCriacao;
 
     @Column(name = "data_atualizacao")
