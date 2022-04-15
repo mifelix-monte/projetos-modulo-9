@@ -1,11 +1,16 @@
 package com.santander.projeto1_modulo9.service.impl;
 
+
 import com.santander.projeto1_modulo9.dto.UsuarioRequest;
 import com.santander.projeto1_modulo9.dto.UsuarioResponse;
 import com.santander.projeto1_modulo9.model.Usuario;
 import com.santander.projeto1_modulo9.repository.UsuarioRepository;
 import com.santander.projeto1_modulo9.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,24 +19,43 @@ import java.util.List;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    //chamar classe de repository para conseguir usar os métodos dela
-
-    @Autowired //vai entrar na classe de Repository e o Spring irá instanciar para mim, se não teria que fazer:
-    //UsuarioRepository usuarioRepository = new UsuarioRepository(){}
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     @Override
-    public List<Usuario> getAll(String nome) {
-        if (nome != null) {
-            return usuarioRepository.findByNome(nome);
-        } else {
-            return usuarioRepository.findAll();
-        }
+    public Page<Usuario> getAll(String nome, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                size,
+                Sort.Direction.DESC,
+                "nome"
+        );
+
+            return usuarioRepository.findAll(pageRequest);
     }
 
     @Override
-    public List<Usuario> getAll() {
-        return null;
+    public Page<UsuarioResponse> getAllByNome(String nome, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(
+            page,
+            size,
+            Sort.Direction.DESC,
+            "nome"
+    );
+
+    return usuarioRepository.findByNome(nome, pageRequest);
+    }
+
+    @Override
+    public Page<UsuarioResponse> getAllByCpf(String cpf, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                size,
+                Sort.Direction.DESC,
+                "cpf"
+        );
+
+        return usuarioRepository.findByCpf(cpf, pageRequest);
     }
 
 
@@ -45,15 +69,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario getById(Integer id) {
         return usuarioRepository.findById(id).orElseThrow();
-
     }
 
-    //MÉTODO DE ATUALIZAR
     @Override
     public Usuario update(UsuarioRequest usuarioRequest, Integer id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow();
 
-        //CAMPOS EDITÁVEIS DO USUARIO
         usuario.setNome(usuarioRequest.getNome());
         usuario.setCpf(usuarioRequest.getCpf());
         usuario.setSenha(usuarioRequest.getSenha());

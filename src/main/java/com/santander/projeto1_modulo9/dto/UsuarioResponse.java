@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Getter @Setter
 @AllArgsConstructor
 
-//TEM AS INFORMAÇÕES QUE EU QUERO VOLTAR COMO RESPOSTA DA API:
 public class UsuarioResponse {
     private Integer id;
     private String cpf;
@@ -20,7 +19,6 @@ public class UsuarioResponse {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
 
-    //CONSTRUTOR DE UsuarioResponse QUE RECEBE UM USUARIO:
     public UsuarioResponse(Usuario usuario) {
         this.id = usuario.getId();
         this.cpf = usuario.getCpf();
@@ -29,7 +27,6 @@ public class UsuarioResponse {
         this.dataAtualizacao = usuario.getDataAtualizacao();
     }
 
-    //MÉTODO QUE RECEBE UMA LISTA DE USUARIO E MAPEIA ESSA LISTA PARA UsuarioResponse
     public static List<UsuarioResponse> toResponse(List<Usuario> usuarios){
         return usuarios.stream().map(UsuarioResponse::new).collect(Collectors.toList());
     }

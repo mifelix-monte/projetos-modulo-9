@@ -32,8 +32,8 @@ public class ContaResponse {
         this.dataAtualizacao = conta.getDataAtualizacao();
         this.saldo = conta.getSaldo();
         this.tipoConta = conta.getTipoConta();
-
-        //public static List<ContaResponse> toResponse(List <Conta> conta){
-           // return contas.stream().map(ContaResponse::new).collect(Collectors.toList());
+    }
+    public static List<ContaResponse> toResponse(List <Conta> contas) {
+        return contas.stream().map(ContaResponse::new).collect(Collectors.toList());
     }
 }
