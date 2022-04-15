@@ -28,8 +28,7 @@ public class ContaController {
 
     @GetMapping("/view")
     public List<ContaView> getAllContaViewByTipoConta(
-            @RequestParam TipoConta tipoConta
-            ){
+            @RequestParam TipoConta tipoConta){
         return contaService.getAllViewByTipoConta(tipoConta);
     }
 
